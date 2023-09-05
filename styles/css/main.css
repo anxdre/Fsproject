@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Quicksand:wght@400;500;700&display=swap');
+
+table {
+    font-family: 'Open Sans', sans-serif;
+    border-collapse: collapse;
+    padding: 16px;
+    width: 100%;
+    text-align: left;
+}
+
+th, td {
+    padding: 16px;
+}
+
+th {
+    height: 70%;
+    background-color: slategray;
+    color: white;
+    font-weight: bold;
+    padding: 16px;
+}
+
+label {
+    color: black;
+    font-weight: lighter;
+    display: block;
+    margin-bottom: 8px;
+}
+
+textarea {
+    resize: none;
+    width: 80%;
+}
+
+select{
+    width: 100%;
+    padding: 16px 20px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+}
+
+.table-list {
+    border-bottom: 1px solid lightgray;
+}
+
+.container {
+    padding: 16px;
+}
+
+.form-width {
+    width: 50%;
+}
+
+.form {
+    padding: 16px;
+}
+
+.form-frame {
+    border: 1px solid lightgray;
+}
+
+.form-title {
+    font-family: 'Open Sans', sans-serif;;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+}
+
+.form-input-content{
+    width: max-content;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.form-input-longtext{
+    height: 80px;
+    max-lines: 5;
+    padding: 6px;
+}
+
+.button-submit {
+    background-color: dodgerblue;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
