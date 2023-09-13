@@ -1,7 +1,9 @@
 <?php
+
 namespace database\model;
 
 use database\DbDriver;
+use mysql_xdevapi\Exception;
 
 require_once("./database/DbDriver.php");
 
@@ -137,17 +139,57 @@ class Movie
 
     public function fetchAll()
     {
-        $query = "SELECT * FROM movie";
+        $query = "SELECT * FROM movie ";
         $row = $this->conn->query($query);
-        return $row->fetch_all();
+        return $row->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function addItem($title, $releaseDate, $rating, $synopsis, $serial, $genre)
+    public function addItem($title, $releaseDate, $rating, $synopsis, $serial)
     {
-        $query = "INSERT INTO movie (title,release_date,rating,synopsis,serial,genre) VALUES (?)";
+        $query = "INSERT INTO movies (title,release_date,rating,synopsis,serial) VALUES (?,?,?,?,?)";
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("ssisss", $title, $releaseDate, $rating, $synopsis, $serial, $genre);
-        return $stmt->execute();
+        try {
+            $stmt->bind_param("ssisi", $title, $releaseDate, $rating, $synopsis, $serial);
+            $stmt->execute();
+            return $stmt->insert_id;
+        } catch (Exception $e) {
+            echo $stmt->error_list;
+        }
+    }
+
+    public function addGenre($idMovie, $listOfGenre)
+    {
+        $query = "INSERT INTO movies_has_genre (movies_id,genre_id) VALUES (?,?)";
+        $stmt = $this->conn->prepare($query);
+        if ($listOfGenre != null) {
+            foreach ($listOfGenre as $item) {
+                try {
+                    $stmt->bind_param("ii", $idMovie, $item);
+                    $stmt->execute();
+                } catch (Exception $e) {
+                    echo $stmt->error_list;
+                }
+            }
+            return true;
+        }
+    }
+
+    public function addActor($idMovie, $listOfActor, $listOfRole)
+    {
+        $query = "INSERT INTO movies_has_actor (movies_id,actor_id,peran) VALUES (?,?,?)";
+        $stmt = $this->conn->prepare($query);
+        if ($listOfActor != null) {
+            for($i = 0; $i < count($listOfActor);$i++) {
+                try {
+                    $stmt->bind_param("iis", $idMovie, $listOfActor[$i],$listOfRole[$i]);
+                    $stmt->execute();
+                } catch (Exception $e) {
+                    echo $stmt->error_list;
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     public function __destruct()

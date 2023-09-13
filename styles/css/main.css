@@ -65,9 +65,11 @@ select{
     font-weight: bold;
 }
 
+
 .form-input {
     width: 100%;
-    padding: 16px 20px;
+    padding-top:10px;
+    padding-bottom:10px;
     border: 1px solid lightgray;
     border-radius: 4px;
 }
@@ -93,5 +95,6 @@ select{
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    width: 100%
 }
 
