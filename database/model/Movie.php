@@ -185,7 +185,6 @@ class Movie
                     $stmt->execute();
                 } catch (Exception $e) {
                     echo $stmt->error_list;
-                    return false;
                 }
             }
             return true;

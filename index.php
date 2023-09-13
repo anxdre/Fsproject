@@ -15,6 +15,8 @@ $genre = new Genre();
 $actor = new Actor();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST != null) {
     try {
+        echo json_encode($_POST['listOfActor']);
+        echo json_encode($_POST['listOfRole']);
         $idMovie = $movie->addItem($_POST['title'], $_POST['releasedate'], $_POST['rating'], $_POST['synopsis'], $_POST['serial']);
         $movie->addActor($idMovie, $_POST['listOfActor'], $_POST['listOfRole']);
         $movie->addGenre($idMovie, $_POST['listOfGenre']);
@@ -188,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST != null) {
         $(this).closest('tr').remove();
     });
 
-    $(document).on("click", '#btn_submit', function (e) {
+    $("#btn_submit").click(function (e) {
         e.preventDefault();
         console.log('clicked');
         const actionurl = "index.php";
@@ -198,16 +200,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST != null) {
         $.ajax({
             url: actionurl,
             type: 'post',
-            dataType: 'application/json',
             data: data,
-            success: function (data) {
-                alert(data['title'] + "successfully added to database")
-            },
-            error: function (e){
-                console.log(e);
-            },
-            then:function (e){
-                console.log(e)
+            success: function () {
+                alert("data successfully added to database")
             }
         })
     });
